@@ -1,4 +1,4 @@
-JFLAGS=$(shell /home/oliver/local/share/julia/julia-config.jl --cflags --ldflags --ldlibs)
+JFLAGS=$(shell $(shell dirname $(shell which julia))/../share/julia/julia-config.jl --cflags --ldflags --ldlibs)
 CC=gcc
 
 host: host.c plugin.so
