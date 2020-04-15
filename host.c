@@ -7,7 +7,7 @@ int main() {
   float plugin_result;
 
   printf("Host - dlopen\n");
-  plugin_lib = dlopen("./plugin.so", RTLD_NOW | RTLD_GLOBAL);
+  plugin_lib = dlopen("./plugin.so", RTLD_NOW);
 
   printf("Host - dlsym\n");
   plugin_func = dlsym(plugin_lib, "plugin_func");

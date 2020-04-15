@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <dlfcn.h>
 #include <julia.h>
 
 float plugin_func(float x)
@@ -6,6 +7,8 @@ float plugin_func(float x)
   jl_function_t *julia_sqrt;
   jl_value_t *julia_input, *julia_output;
   float result;
+
+  dlopen("libjulia.so", RTLD_NOW | RTLD_GLOBAL);
 
   jl_init();
 
