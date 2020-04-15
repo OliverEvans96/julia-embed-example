@@ -54,3 +54,7 @@ _start at ./host (unknown line)
 atexit hook threw an error: ErrorException("could not load symbol "jl_array_del_beg":
 ./host: undefined symbol: jl_array_del_beg")
 ```
+
+# Solution
+
+I asked about this on the Julia discourse [here](https://discourse.julialang.org/t/embedding-julia-without-rtld-global-in-dlopen/37655), and got a very straightforward answer. Simply `dlopen`ing `libjulia.so` from the client before calling `jl_init()` resolves the issue. [See the solution here](https://github.com/OliverEvans96/julia-embed-example/pull/1/files)
