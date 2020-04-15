@@ -2,10 +2,11 @@
 
 This example works fine when the host uses `RTLD_GLOBAL` in `dlopen`:
 ```
-oliver@oliver-x1c7-arch:~/code/julia/embed-example (master) % make
+$ make
 gcc -shared -o plugin.so -std=gnu99 -I'/home/oliver/local/src/julia-1.4.0/include/julia' -fPIC -L'/home/oliver/local/src/julia-1.4.0/lib' -Wl,--export-dynamic -Wl,-rpath,'/home/oliver/local/src/julia-1.4.0/lib' -Wl,-rpath,'/home/oliver/local/src/julia-1.4.0/lib/julia' -ljulia -fPIC plugin.c
 gcc -std=c99 -Wall -ldl host.c -o host 
-oliver@oliver-x1c7-arch:~/code/julia/embed-example (master) % ./host
+
+$ ./host
 Host - dlopen
 Host - dlsym
 Host - call plugin_func
@@ -21,10 +22,12 @@ Host - finished
 
 But without `RTLD_GLOBAL`, it fails because it can't access the necessary libraries.
 ```
-oliver@oliver-x1c7-arch:~/code/julia/embed-example (master) % sed -i 's/RTLD_NOW | RTLD_GLOBAL/RTLD_NOW/' host.c
-oliver@oliver-x1c7-arch:~/code/julia/embed-example (master*) % make
+$ sed -i 's/RTLD_NOW | RTLD_GLOBAL/RTLD_NOW/' host.c
+
+$ make
 gcc -std=c99 -Wall -ldl host.c -o host 
-oliver@oliver-x1c7-arch:~/code/julia/embed-example (master*) % ./host
+
+$ ./host
 Host - dlopen
 Host - dlsym
 Host - call plugin_func
